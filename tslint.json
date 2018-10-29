@@ -1,0 +1,12 @@
+{
+  "extends": ["tslint-config-prettier"],
+  "rules": {
+    "no-submodule-imports": false,
+    "no-implicit-dependencies": false,
+    "interface-name": false,
+    "no-empty-interface": false,
+    "quotemark": [true, "double", "jsx-double", "avoid-escape"],
+    "semicolon": [true, "never"],
+    "trailing-comma": [false]
+  }
+}
