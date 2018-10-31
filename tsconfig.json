@@ -4,6 +4,7 @@
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "jsx": "react-native",
     "module": "es6",
     "moduleResolution": "node",
@@ -17,8 +18,14 @@
     "baseUrl": ".",
     "paths": {
       "root/*": ["*"],
-      "api/*": ["src/api/*"],
-      "common/*": ["src/common/*"],
+      "core/*": ["src/core/*"],
+      "commons/*": ["src/core/commons/*"],
+      "entities/*": ["src/core/entities/*"],
+      "gateway/*": ["src/core/gateway/*"],
+      "services/*": ["src/core/services/*"],
+      "adapters/*": ["src/core/adapters/*"],
     }
-  }
+  },
+  "exclude": ["node_modules"],
+  "include": ["src"]
 }

@@ -1,13 +1,22 @@
 {
-  "presets": ["module:metro-react-native-babel-preset"],
+  "presets": [
+    "module:metro-react-native-babel-preset",
+    "module:react-native-dotenv"
+  ],
   "plugins": [
     ["module-resolver", {
       "root": "./",
       "alias": {
         "root": "./",
-        "common": "./src/common",
+        "core": "./src/core",
+        "commons": "./src/core/commons",
+        "entities": "./src/core/entities",
+        "gateway": "./src/core/gateway",
+        "services": "./src/core/services",
+        "adapters": "./src/core/adapters",
         "underscore": "lodash"
       }
-    }]
+    }],
+    ["@babel/plugin-proposal-decorators", {"legacy": true}]
   ]
 }

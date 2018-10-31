@@ -96,6 +96,8 @@
 
 import React, {Component} from "react"
 import {Platform, StyleSheet, Text, View} from "react-native"
+import { Dependency } from "../core/commons"
+import { PokemonTCGDataProvider, PokemonTCGProviderSymbol } from "../core/gateway/content/pokemonTCG"
 
 const instructions = Platform.select({
   ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
@@ -106,6 +108,13 @@ const instructions = Platform.select({
 
 type Props = {}
 export class RootComponent extends Component<Props> {
+
+  async componentDidMount(){
+    Dependency.setup()
+    await Dependency.get<PokemonTCGDataProvider>(PokemonTCGProviderSymbol).getPokemonTCGSets({})
+      .then(test => console.log(test))
+  }
+
   render() {
     return (
       <View style={styles.container}>

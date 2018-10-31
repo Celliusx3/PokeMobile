@@ -4,6 +4,6 @@
 import "babel-polyfill"
 import { AppRegistry } from "react-native"
 import { RootComponent } from "./root-component"
-import { CONSTANTS } from "common/constants"
 
-AppRegistry.registerComponent(CONSTANTS.APP_NAME, () => RootComponent)
+const appName: string = require("root/package.json").name || ""
+AppRegistry.registerComponent(appName, () => RootComponent)
