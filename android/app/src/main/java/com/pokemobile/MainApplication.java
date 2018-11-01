@@ -1,4 +1,4 @@
-package com.baseproject;
+package com.pokemobile;
 
 import android.app.Application;
 
