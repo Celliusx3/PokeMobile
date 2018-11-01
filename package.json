@@ -12,7 +12,7 @@
     "babel-polyfill": "^6.26.0",
     "json2typescript": "^1.0.6",
     "lodash": "^4.17.11",
-    "mobx": "^5.5.2",
+    "mobx": "4.5.2",
     "mobx-react": "^5.3.6",
     "mobx-state-tree": "^3.7.1",
     "ramda": "^0.25.0",
