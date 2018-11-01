@@ -1,7 +1,7 @@
 import { PokemonTCGSet } from "../../entities"
 
 export interface HomeInteractor {
-  getHomeRails: () => Promise<PokemonTCGSet[]>
+  getPokemonTCGSets: () => Promise<PokemonTCGSet[]>
 }
 
 export const HomeInteractorSymbol = Symbol("HomeInteractor")

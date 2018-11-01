@@ -24,6 +24,11 @@
       "gateway/*": ["src/core/gateway/*"],
       "services/*": ["src/core/services/*"],
       "adapters/*": ["src/core/adapters/*"],
+      "useCases/*": ["src/core/useCases/*"],
+      "presentations/*": ["src/presentations/*"],
+      "components/*": ["src/presentations/components/*"],
+      "navigators/*": ["src/presentations/navigators/*"],
+      "screens/*": ["src/presentations/screens/*"]
     }
   },
   "exclude": ["node_modules"],

@@ -8,7 +8,6 @@ export class DefaultNetworkService implements NetworkService {
   private _environment: Environment
   /**
    * The userAgent that the sessions are configured with; see https://tools.ietf.org/html/rfc7231#section-5.5.3
-   * Example: `ReactNatve Example/1.0 (com.astro.base; build:1; RN.iOS 10.0.0)`
    */
   private _userAgent: string
 

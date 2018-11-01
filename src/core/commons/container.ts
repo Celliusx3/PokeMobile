@@ -10,6 +10,7 @@ import { HomeInteractor, HomeInteractorSymbol, DefaultHomeInteractor } from "../
 import { StorageService, StorageServiceSymbol, DefaultStorageService, StorageProviderSymbol, StorageProvider, DefaultStorageProvider } from "../services"
 import { StoreService, StoreServiceSymbol, DefaultStoreService } from "../services/store"
 import { JsonMapper, JsonMapperSymbol, DefaultJsonMapper } from "./mapper"
+import { DetailsInteractor, DetailsInteractorSymbol, DefaultDetailsInteractor } from "../useCases/detailsInteractor"
 
 /**
  * Add `Injectable` decorate to a target.
@@ -208,11 +209,18 @@ export class Dependency {
       .bind<HomeInteractor>(HomeInteractorSymbol)
       .to(DefaultHomeInteractor)
       .inRequestScope()
+    
+    container
+      .bind<DetailsInteractor>(DetailsInteractorSymbol)
+      .to(DefaultDetailsInteractor)
+      .inRequestScope()
 
     // Decorate injectables
     Dependency.decorateInjectable(DefaultHomeInteractor)
+    Dependency.decorateInjectable(DefaultDetailsInteractor)
   
     // Decorate injections
     Dependency.decorateInjections(DefaultHomeInteractor, [ContentGatewaySymbol])
+    Dependency.decorateInjections(DefaultDetailsInteractor, [ContentGatewaySymbol])
   }
 }

@@ -1,11 +1,11 @@
-import { HomeInteractor } from "./homeInteractor"
+import { DetailsInteractor } from "./detailsInteractor"
 import { ContentGateway } from "../../gateway/content/content.gateway"
 import { PokemonTCGSet } from "../../entities"
 
 /**
  * An implementation of `HomeInteractor`
  */
-export class DefaultHomeInteractor implements HomeInteractor {
+export class DefaultDetailsInteractor implements DetailsInteractor {
   private _contentGateway: ContentGateway
 
   /**

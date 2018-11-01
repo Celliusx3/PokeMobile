@@ -8,7 +8,7 @@ import {
 import { defaultGetPokemonTCGSets } from "./apis/getPokemonTCGSets/defaultGetPokemonTCGSets"
 
 /**
- * An implementation of `TribeAuthDataProvider`
+ * An implementation of `PokemonTCGDataProvider`
  */
 export class DefaultPokemonTCGDataProvider implements PokemonTCGDataProvider {
   private _networkService: NetworkService
