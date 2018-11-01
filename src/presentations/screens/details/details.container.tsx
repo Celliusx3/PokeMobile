@@ -14,14 +14,16 @@ export interface DetailsContainerState {}
 @observer
 export class DetailsContainer extends React.Component<DetailsContainerProps, DetailsContainerState> {
   componentWillMount() {
-    const { detailsStore } = this.props
-    detailsStore.getAllPokemonTCGSets()
+    console.log("ComponentWillMount")
+    const { detailsStore, navigation } = this.props
+    const series: string = navigation.getParam("series", "")
+    detailsStore.getPokemonTCGCards(series, 0,10)
   }
 
   render() {
     const { detailsStore, navigation } = this.props
-    const { isLoading, pokemonTCGSets } = detailsStore
+    const { isLoading, pokemonTCGCards } = detailsStore
 
-    return <DetailsScreen isLoading = {isLoading} pokemonTCGSets = {pokemonTCGSets} navigation = {navigation} />
+    return <DetailsScreen isLoading = {isLoading} pokemonTCGCards = {pokemonTCGCards} navigation = {navigation} />
   }
 }

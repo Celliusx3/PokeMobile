@@ -2,7 +2,9 @@ import { Environment } from "core/commons/environment"
 import { ContentGateway } from "./content.gateway"
 import { PokemonTCGDataProvider, 
   GetPokemonTCGSetsRequestPayload, 
-  GetPokemonTCGSetsResponsePayload } from "./pokemonTCG"
+  GetPokemonTCGSetsResponsePayload, 
+  GetPokemonTCGCardsRequestPayload,
+  GetPokemonTCGCardsResponsePayload} from "./pokemonTCG"
 
 export class DefaultContentGateway implements ContentGateway {
   private _environment: Environment
@@ -15,5 +17,9 @@ export class DefaultContentGateway implements ContentGateway {
 
   public getPokemonTCGSets = (request: GetPokemonTCGSetsRequestPayload): GetPokemonTCGSetsResponsePayload => {
     return this._pokemonTCGDataProvider.getPokemonTCGSets(request)
+  }
+
+  public getPokemonTCGCards = (request: GetPokemonTCGCardsRequestPayload): GetPokemonTCGCardsResponsePayload => {
+    return this._pokemonTCGDataProvider.getPokemonTCGCards(request)
   }
 }

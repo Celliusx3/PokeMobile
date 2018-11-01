@@ -1,16 +1,19 @@
-import { PokemonTCGSet } from "core/entities"
 import { Dependency, JsonMapper, JsonMapperSymbol } from "root/src/core/commons"
+import { PokemonTCGCard } from "root/src/core/entities"
 
 export const getPokemonTCGSetsMapper = (
   json: any,
-): Promise<PokemonTCGSet[]> => {
+): Promise<PokemonTCGCard[]> => {
   try {
     const jsonMapper = Dependency.get<JsonMapper>(JsonMapperSymbol)
-    let pokemonTCGSets: PokemonTCGSet[] = jsonMapper.deserialize(json.sets, PokemonTCGSet)
+    let pokemonTCGCards: PokemonTCGCard[]  = jsonMapper.deserialize(json.cards, PokemonTCGCard)
+    console.log(pokemonTCGCards)
+
     return Promise.resolve(
-      pokemonTCGSets
+      pokemonTCGCards
     )
   } catch (error) {
+    console.log(error)
     return Promise.reject(
       error
     )

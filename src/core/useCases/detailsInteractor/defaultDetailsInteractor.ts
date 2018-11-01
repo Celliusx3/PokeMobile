@@ -1,22 +1,22 @@
 import { DetailsInteractor } from "./detailsInteractor"
 import { ContentGateway } from "../../gateway/content/content.gateway"
-import { PokemonTCGSet } from "../../entities"
+import { PokemonTCGCard } from "../../entities/pokemonTCGCard.entity"
 
 /**
- * An implementation of `HomeInteractor`
+ * An implementation of `Details Interactor`
  */
 export class DefaultDetailsInteractor implements DetailsInteractor {
   private _contentGateway: ContentGateway
 
   /**
-   * Represents a `HomeInteractor`.
+   * Represents a `Details Interactor`.
    * @constructor
    */
   constructor(contentGateway: ContentGateway) {
     this._contentGateway = contentGateway
   }
 
-  public getPokemonTCGSets = (): Promise<PokemonTCGSet[]> => {
-    return this._contentGateway.getPokemonTCGSets({})
+  public getPokemonTCGCards = (series, page, pageSize): Promise<PokemonTCGCard[]> => {
+    return this._contentGateway.getPokemonTCGCards({series, page, pageSize})
   }
 }

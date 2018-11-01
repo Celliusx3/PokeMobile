@@ -1,7 +1,7 @@
-import { PokemonTCGSet } from "../../entities"
+import { PokemonTCGCard } from "../../entities/pokemonTCGCard.entity"
 
 export interface DetailsInteractor {
-  getPokemonTCGSets: () => Promise<PokemonTCGSet[]>
+  getPokemonTCGCards: (series: string, page: string, pageSize: string) => Promise<PokemonTCGCard[]>
 }
 
-export const DetailsInteractorSymbol = Symbol("DetailssInteractor")
+export const DetailsInteractorSymbol = Symbol("DetailsInteractor")

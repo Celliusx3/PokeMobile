@@ -1,7 +1,7 @@
 import { types, flow } from "mobx-state-tree"
 import { Dependency } from "core/commons"
-import { HomeInteractor, HomeInteractorSymbol } from "core/useCases"
-import { PokemonTCGSet } from "core/entities"
+import { DetailsInteractor, DetailsInteractorSymbol } from "core/useCases"
+import { PokemonTCGSet, PokemonTCGCard } from "core/entities"
 
 /**
  * A DetailStore model.
@@ -10,20 +10,21 @@ export const DetailsStoreModel = types
   .model("DetailsStore")
   .props({
     isLoading: false,
-    pokemonTCGSets: types.optional(types.frozen(), []),
+    pokemonTCGCards: types.optional(types.frozen(), []),
     error: types.optional(types.string, ""),
   })
   .views(self => ({
   }))
   .actions(self => {
-    const homeInteractor = Dependency.get<HomeInteractor>(HomeInteractorSymbol)
+    const detailsInteractor = Dependency.get<DetailsInteractor>(DetailsInteractorSymbol)
 
-    const getAllPokemonTCGSets = flow(function* getAllPokemonTCGSets() {
+    const getPokemonTCGCards = flow(function* getPokemonTCGCards(series: string, page: number, pageSize: number) {
       self.isLoading = true
 
       try {
-        const payload: PokemonTCGSet[] = yield homeInteractor.getPokemonTCGSets()
-        setPokemonTCGSets(payload)
+        console.log("Test")
+        const payload: PokemonTCGCard[] = yield detailsInteractor.getPokemonTCGCards("Base", page.toString(), pageSize.toString())
+        setPokemonTCGCards(payload)
         self.isLoading = false
       } catch (error) {
         console.error(error)
@@ -34,12 +35,12 @@ export const DetailsStoreModel = types
       return Promise.resolve()
     })
 
-    const setPokemonTCGSets = (items: PokemonTCGSet[]) => {
-      self.pokemonTCGSets.replace(items)
+    const setPokemonTCGCards = (items: PokemonTCGCard[]) => {
+      self.pokemonTCGCards = items
     }
 
     return {
-      getAllPokemonTCGSets,
+      getPokemonTCGCards,
     }
   })
 

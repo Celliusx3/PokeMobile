@@ -1,7 +1,7 @@
 import {JsonObject, JsonProperty} from "json2typescript"
 
 @JsonObject("pokemonTCGSet")
-class PokemonTCGSet {
+export class PokemonTCGSet {
   @JsonProperty("code", String)
   private code: string
   @JsonProperty("ptcgoCode", String, true)
@@ -70,5 +70,3 @@ class PokemonTCGSet {
   }
 
 }
-
-export { PokemonTCGSet }
