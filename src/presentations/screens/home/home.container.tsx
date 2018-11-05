@@ -13,9 +13,20 @@ export interface HomeContainerState {}
 @inject("homeStore")
 @observer
 export class HomeContainer extends React.Component<HomeContainerProps, HomeContainerState> {
+
+  static navigationOptions = ({ navigation }) => ({
+    title: navigation.state.params ? `${navigation.state.params.title}`: "Home"
+  })
+
   componentWillMount() {
     const { homeStore } = this.props
+    this._setHomepageTitle()
     homeStore.getAllPokemonTCGSets()
+  }
+
+  private _setHomepageTitle = () => {
+    const {homeStore, navigation} = this.props
+    navigation.setParams({ title: homeStore.getHomeTitle() })
   }
 
   render() {

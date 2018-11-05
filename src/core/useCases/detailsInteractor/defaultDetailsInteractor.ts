@@ -16,7 +16,7 @@ export class DefaultDetailsInteractor implements DetailsInteractor {
     this._contentGateway = contentGateway
   }
 
-  public getPokemonTCGCards = (series, page, pageSize): Promise<PokemonTCGCard[]> => {
-    return this._contentGateway.getPokemonTCGCards({series, page, pageSize})
+  public getPokemonTCGCards = (setCode, page, pageSize): Promise<PokemonTCGCard[]> => {
+    return this._contentGateway.getPokemonTCGCards({setCode, page, pageSize})
   }
 }

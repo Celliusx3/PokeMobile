@@ -220,7 +220,7 @@ export class Dependency {
     Dependency.decorateInjectable(DefaultDetailsInteractor)
   
     // Decorate injections
-    Dependency.decorateInjections(DefaultHomeInteractor, [ContentGatewaySymbol])
+    Dependency.decorateInjections(DefaultHomeInteractor, [ContentGatewaySymbol, EnvironmentSymbol])
     Dependency.decorateInjections(DefaultDetailsInteractor, [ContentGatewaySymbol])
   }
 }

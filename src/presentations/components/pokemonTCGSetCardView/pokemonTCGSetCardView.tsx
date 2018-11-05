@@ -1,6 +1,6 @@
 import * as React from "react"
-import { StyleSheet, Image, Text, ViewStyle, TouchableOpacity, GestureResponderEvent } from "react-native"
-import { Card, CardSection } from "../../commonComponents"
+import { StyleSheet, Text, ViewStyle, TouchableOpacity, GestureResponderEvent } from "react-native"
+import { Card, CardSection, ProgressImage } from "../../commonComponents"
 import { PokemonTCGSet } from "root/src/core/entities"
 import metrics from "../../theme/base/metrics"
 
@@ -12,13 +12,14 @@ interface PokemonTCGSetCardViewProps {
 
 interface PokemonTCGSetCardViewState {
   dimensions: {width: number, height: number}
+  isImageReady: boolean
 }
 
 export class PokemonTCGSetCardView extends React.Component<PokemonTCGSetCardViewProps, PokemonTCGSetCardViewState> {
 
   constructor (props) {
     super(props)
-    this.state = {dimensions: undefined}
+    this.state = {dimensions: undefined, isImageReady: false}
   }
 
   private onLayout = event => {
@@ -56,12 +57,13 @@ export class PokemonTCGSetCardView extends React.Component<PokemonTCGSetCardView
 
     if (dimensions){
       const imageWidth = dimensions.width - (2 * metrics.margin.tiny)
-      const imageHeight = dimensions.width - (2 * metrics.margin.tiny)
-      return <Image 
-        resizeMode = "contain"
-        style={{width: imageWidth, height: imageHeight}} 
-        source={{uri: pokemonTCGSet.getLogoUrl()}} 
-      />
+      const imageHeight = imageWidth
+      return (
+        <ProgressImage
+          sourceUri = {pokemonTCGSet.getLogoUrl()}
+          width = {imageWidth}
+          height = {imageHeight}        />
+      )
     }
     else
       return null
@@ -72,11 +74,10 @@ export class PokemonTCGSetCardView extends React.Component<PokemonTCGSetCardView
     return  <Text style = {styles.titleStyle}>
               {pokemonTCGSet.getName()}
             </Text> 
-    
   }
 
   render() {
-    const { pokemonTCGSet, containerStyle, onPress } = this.props
+    const { containerStyle, onPress } = this.props
     const combinedContainerStyle = [styles.containerStyle as ViewStyle, containerStyle]
 
     return (
@@ -109,10 +110,12 @@ const styles =  StyleSheet.create({
     color: "#fff",
     fontSize: metrics.font.medium,
     padding: metrics.margin.tiny,
+    marginVertical: metrics.margin.tiny,
     borderRadius: metrics.borderRadius.small
   },
   titleStyle:{
-    fontSize: 18,
+    fontSize: metrics.font.regular,
+    marginVertical: metrics.margin.tiny,
     color: "#2c3873"
   }
 })

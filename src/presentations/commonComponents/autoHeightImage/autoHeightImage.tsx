@@ -1,5 +1,6 @@
 import * as React from "react"
 import { View, Image } from "react-native"
+import { ProgressImage } from "../progressImage"
 
 interface AutoHeightImageProps {
   sourceUri: string
@@ -35,12 +36,13 @@ export class AutoHeightImage extends React.Component<AutoHeightImageProps, AutoH
     const { sourceUri } = this.props
 
     if (dimensions){
-      return <Image
-      source={ {uri: sourceUri} }
-      style={{
-        width: dimensions.width,
-        height: dimensions.height
-      }} />
+      return (
+        <ProgressImage
+          sourceUri = {sourceUri}
+          width = {dimensions.width}
+          height = {dimensions.height}
+        />
+      )
     }
     else
       return null

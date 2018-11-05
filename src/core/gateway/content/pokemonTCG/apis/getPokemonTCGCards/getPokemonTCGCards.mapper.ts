@@ -7,7 +7,7 @@ export const getPokemonTCGSetsMapper = (
   try {
     const jsonMapper = Dependency.get<JsonMapper>(JsonMapperSymbol)
     let pokemonTCGCards: PokemonTCGCard[]  = jsonMapper.deserialize(json.cards, PokemonTCGCard)
-    console.log(pokemonTCGCards)
+    console.log(json)
 
     return Promise.resolve(
       pokemonTCGCards

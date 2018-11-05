@@ -34,12 +34,18 @@ export const HomeStoreModel = types
       return Promise.resolve()
     })
 
+    const getHomeTitle =  () => {
+      return homeInteractor.getTitle()
+    }
+
+
     const setPokemonTCGSets = (items: PokemonTCGSet[]) => {
       self.pokemonTCGSets = items
     }
 
     return {
       getAllPokemonTCGSets,
+      getHomeTitle
     }
   })
 

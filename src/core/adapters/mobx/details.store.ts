@@ -1,7 +1,7 @@
-import { types, flow } from "mobx-state-tree"
+import { types, flow, getSnapshot, applySnapshot } from "mobx-state-tree"
 import { Dependency } from "core/commons"
 import { DetailsInteractor, DetailsInteractorSymbol } from "core/useCases"
-import { PokemonTCGSet, PokemonTCGCard } from "core/entities"
+import { PokemonTCGCard } from "core/entities"
 
 /**
  * A DetailStore model.
@@ -11,20 +11,31 @@ export const DetailsStoreModel = types
   .props({
     isLoading: false,
     pokemonTCGCards: types.optional(types.frozen(), []),
+    canFetchMoreCards: types.optional(types.boolean, true),
     error: types.optional(types.string, ""),
   })
   .views(self => ({
   }))
   .actions(self => {
+    let initialState = {}
     const detailsInteractor = Dependency.get<DetailsInteractor>(DetailsInteractorSymbol)
 
-    const getPokemonTCGCards = flow(function* getPokemonTCGCards(series: string, page: number, pageSize: number) {
+    const getPokemonTCGCards = flow(function* getPokemonTCGCards(set: string) {
+      if (! self.canFetchMoreCards)
+        return
+
       self.isLoading = true
 
       try {
-        console.log("Test")
-        const payload: PokemonTCGCard[] = yield detailsInteractor.getPokemonTCGCards("Base", page.toString(), pageSize.toString())
+        const pageSize = 10
+        const page = Math.ceil(self.pokemonTCGCards.length / pageSize) + 1
+        console.log(page)
+        const payload: PokemonTCGCard[] = yield detailsInteractor.getPokemonTCGCards(set, page.toString(), pageSize.toString())
         setPokemonTCGCards(payload)
+
+        if (!payload || payload.length <= 0)
+          setCanFetchMoreCards(false)
+
         self.isLoading = false
       } catch (error) {
         console.error(error)
@@ -36,11 +47,34 @@ export const DetailsStoreModel = types
     })
 
     const setPokemonTCGCards = (items: PokemonTCGCard[]) => {
-      self.pokemonTCGCards = items
+      if (!items || items.length <= 0)
+        return
+      if (!self.pokemonTCGCards || self.pokemonTCGCards.length <= 0){
+        self.pokemonTCGCards = items
+        return
+      }
+      self.pokemonTCGCards = self.pokemonTCGCards.concat(items)
+    }
+
+    const setCanFetchMoreCards = (value: boolean) => {
+      self.canFetchMoreCards = value
+    }
+    
+    const clearToInitialState = () => {
+      self.pokemonTCGCards = []
+    }
+
+    const afterCreate = () => {
+      initialState = getSnapshot(self)
+    }
+
+    const reset = () => {
+      applySnapshot(self, initialState)
     }
 
     return {
       getPokemonTCGCards,
+      reset
     }
   })
 

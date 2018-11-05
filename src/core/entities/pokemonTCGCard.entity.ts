@@ -41,6 +41,10 @@ export class PokemonTCGCard {
     return this.imageUrl
   }
 
+  public getImageUrlHiRes = (): string => {
+    return this.imageUrlHiRes
+  }
+
   public getId = (): string => {
     return this.id
   }

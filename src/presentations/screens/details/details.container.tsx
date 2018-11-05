@@ -8,22 +8,51 @@ export interface DetailsContainerProps extends NavigationScreenProps {
   detailsStore: DetailsStore
 }
 
-export interface DetailsContainerState {}
+export interface DetailsContainerState {
+  setCode: string
+}
 
 @inject("detailsStore")
 @observer
 export class DetailsContainer extends React.Component<DetailsContainerProps, DetailsContainerState> {
+
+  static navigationOptions = ({ navigation }) => ({
+    title: `${navigation.state.params.title}`
+  })
+
+  constructor (props) {
+    super(props)
+    this.state = {
+      setCode: "",
+    }
+  }
+
   componentWillMount() {
-    console.log("ComponentWillMount")
     const { detailsStore, navigation } = this.props
-    const series: string = navigation.getParam("series", "")
-    detailsStore.getPokemonTCGCards(series, 0,10)
+    const setCode: string = navigation.getParam("setCode", "")
+    this.setState({
+      setCode
+    })
+    detailsStore.reset()
+    detailsStore.getPokemonTCGCards(setCode)
+  }
+
+  private _onFetchMoreCards = () => {
+    const { detailsStore } = this.props
+    const { setCode } = this.state
+    const { getPokemonTCGCards } = detailsStore
+    console.log("Fetching more cards")
+    getPokemonTCGCards(setCode)
   }
 
   render() {
     const { detailsStore, navigation } = this.props
     const { isLoading, pokemonTCGCards } = detailsStore
 
-    return <DetailsScreen isLoading = {isLoading} pokemonTCGCards = {pokemonTCGCards} navigation = {navigation} />
+    return <DetailsScreen 
+      isLoading = {isLoading}
+      pokemonTCGCards = {pokemonTCGCards} 
+      onFetchMoreCards = {this._onFetchMoreCards}
+      navigation = {navigation} />
   }
 }

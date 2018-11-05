@@ -1,8 +1,7 @@
 import * as React from "react"
-import { StyleSheet, Image, Text, ViewStyle, TouchableOpacity, GestureResponderEvent } from "react-native"
+import { StyleSheet, ViewStyle, TouchableOpacity, GestureResponderEvent } from "react-native"
 import { Card, CardSection, AutoHeightImage } from "../../commonComponents"
-import { PokemonTCGSet, PokemonTCGCard } from "root/src/core/entities"
-import metrics from "../../theme/base/metrics"
+import { PokemonTCGCard } from "root/src/core/entities"
 
 interface PokemonTCGCardCardViewProps {
   containerStyle?: ViewStyle
@@ -32,11 +31,9 @@ export class PokemonTCGCardCardView extends React.Component<PokemonTCGCardCardVi
     const { pokemonTCGCard } = this.props
 
     if (dimensions){
-      const imageWidth = dimensions.width - (2 * metrics.margin.tiny)
-      const imageHeight = dimensions.width - (2 * metrics.margin.tiny)
       return <AutoHeightImage 
         sourceUri = { pokemonTCGCard.getImageUrl()}
-        width = { imageWidth }
+        width = { dimensions.width }
       />
     }
     else
@@ -63,18 +60,6 @@ export class PokemonTCGCardCardView extends React.Component<PokemonTCGCardCardVi
 
 const styles =  StyleSheet.create({
   containerStyle: {
-    backgroundColor:"#fff", 
-    padding: metrics.margin.tiny
-  },
-  tagStyle: {
-    overflow: "hidden",
-    color: "#fff",
-    fontSize: metrics.font.medium,
-    padding: metrics.margin.tiny,
-    borderRadius: metrics.borderRadius.small
-  },
-  titleStyle:{
-    fontSize: 18,
-    color: "#2c3873"
+    backgroundColor:"transparent", 
   }
 })

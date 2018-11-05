@@ -23,9 +23,12 @@ export class HomeScreen extends React.Component<HomeScreenProps, HomeScreenState
     const { navigation } = this.props
     return (
       <PokemonTCGSetCardView
-        containerStyle = {{width: this._getCardViewWidth()}}
+        containerStyle = {{width: this._getCardViewWidth(), height: this._getCardViewWidth() + 64}}
         pokemonTCGSet = {item}
-        onPress = {() => {navigation.navigate("Details")}}
+        onPress = {() => {navigation.navigate("Details", {
+          setCode: item.getCode(),
+          title: item.getName()
+        })}}
       />
     )
   }

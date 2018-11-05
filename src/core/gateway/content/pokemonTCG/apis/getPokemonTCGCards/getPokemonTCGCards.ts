@@ -5,7 +5,7 @@ export type GetPokemonTCGCardsResponsePayload = Promise<PokemonTCGCard[]>
 export type GetPokemonTCGCards = (request: GetPokemonTCGCardsRequestPayload) => GetPokemonTCGCardsResponsePayload
 
 export interface GetPokemonTCGCardsRequestPayload {
-  series?: string
+  setCode?: string
   page?: string
   pageSize?: string
 }
