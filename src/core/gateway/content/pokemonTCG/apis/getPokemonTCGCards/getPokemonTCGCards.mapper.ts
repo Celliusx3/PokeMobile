@@ -1,7 +1,7 @@
 import { Dependency, JsonMapper, JsonMapperSymbol } from "root/src/core/commons"
 import { PokemonTCGCard } from "root/src/core/entities"
 
-export const getPokemonTCGSetsMapper = (
+export const getPokemonTCGCardsMapper = (
   json: any,
 ): Promise<PokemonTCGCard[]> => {
   try {
